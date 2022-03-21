@@ -1,0 +1,21 @@
+	DriverNumber	BroadcastName	Abbreviation	TeamName	TeamColor	FirstName	LastName	FullName	Position	GridPosition	Q1	Q2	Q3	Time	Status	Points
+16	16	C LECLERC	LEC	Ferrari	ed1c24	Charles	Leclerc	Charles Leclerc	1.0	1.0				0 days 01:37:33.584000	Finished	26.0
+55	55	C SAINZ	SAI	Ferrari	ed1c24	Carlos	Sainz	Carlos Sainz	2.0	3.0				0 days 01:37:39.182000	Finished	18.0
+44	44	L HAMILTON	HAM	Mercedes	6cd3bf	Lewis	Hamilton	Lewis Hamilton	3.0	5.0				0 days 01:37:43.259000	Finished	15.0
+63	63	G RUSSELL	RUS	Mercedes	6cd3bf	George	Russell	George Russell	4.0	9.0				0 days 01:37:44.795000	Finished	12.0
+20	20	K MAGNUSSEN	MAG	Haas F1 Team	b6babd	Kevin	Magnussen	Kevin Magnussen	5.0	7.0				0 days 01:37:48.338000	Finished	10.0
+77	77	V BOTTAS	BOT	Alfa Romeo	b12039	Valtteri	Bottas	Valtteri Bottas	6.0	6.0				0 days 01:37:49.703000	Finished	8.0
+31	31	E OCON	OCO	Alpine	2293d1	Esteban	Ocon	Esteban Ocon	7.0	11.0				0 days 01:37:53.007000	Finished	6.0
+22	22	Y TSUNODA	TSU	AlphaTauri	4e7c9b	Yuki	Tsunoda	Yuki Tsunoda	8.0	16.0				0 days 01:37:53.970000	Finished	4.0
+14	14	F ALONSO	ALO	Alpine	2293d1	Fernando	Alonso	Fernando Alonso	9.0	8.0				0 days 01:37:55.974000	Finished	2.0
+24	24	G ZHOU	ZHO	Alfa Romeo	b12039	Guanyu	Zhou	Guanyu Zhou	10.0	15.0				0 days 01:37:56.648000	Finished	1.0
+47	47	M SCHUMACHER	MSC	Haas F1 Team	b6babd	Mick	Schumacher	Mick Schumacher	11.0	12.0				0 days 01:38:06.158000	Finished	0.0
+18	18	L STROLL	STR	Aston Martin	2d826d	Lance	Stroll	Lance Stroll	12.0	19.0				0 days 01:38:19.457000	Finished	0.0
+23	23	A ALBON	ALB	Williams	37bedd	Alexander	Albon	Alexander Albon	13.0	14.0				0 days 01:38:27.516000	Finished	0.0
+3	3	D RICCIARDO	RIC	McLaren	f58020	Daniel	Ricciardo	Daniel Ricciardo	14.0	18.0				0 days 01:38:28.559000	Finished	0.0
+4	4	L NORRIS	NOR	McLaren	f58020	Lando	Norris	Lando Norris	15.0	13.0				0 days 01:38:29.919000	Finished	0.0
+6	6	N LATIFI	LAT	Williams	37bedd	Nicholas	Latifi	Nicholas Latifi	16.0	20.0				0 days 01:38:35.379000	Finished	0.0
+27	27	N HULKENBERG	HUL	Aston Martin	2d826d	Nico	Hulkenberg	Nico Hulkenberg	17.0	17.0				0 days 01:38:37.413000	Finished	0.0
+11	11	S PEREZ	PER	Red Bull Racing	1e5bc6	Sergio	Perez	Sergio Perez	18.0	4.0					Engine	0.0
+1	1	M VERSTAPPEN	VER	Red Bull Racing	1e5bc6	Max	Verstappen	Max Verstappen	19.0	2.0					Steering	0.0
+10	10	P GASLY	GAS	AlphaTauri	4e7c9b	Pierre	Gasly	Pierre Gasly	20.0	10.0					Engine	0.0
