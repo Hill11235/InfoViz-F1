@@ -1,7 +1,7 @@
 <html>
 
 	<head>
-		
+		<link rel="shortcut icon" href="#">
 		<!-- we want to use D3, so this is where the D3 library version 7 gets called-->
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		
@@ -28,6 +28,10 @@
 		<!-- start of JavaScript code -->
 		<script> 
 		let datapath = "data/Position Data/Bahrain_Race_Car_Num_16_Pos_Data.csv";
+
+		let width = 800;					//specifies the width, height and margins of our SVG element
+		let height = 600;
+		let margin = 100;
 		
 		//const whiteSpaceParser = d3.dsvFormat(" ");
 		//const data = whiteSpaceParser.parse(datapath);
@@ -36,6 +40,25 @@
 		d3.csv(datapath)
 		    .then(function(myData){
 				console.log(myData);
+
+				let svg = d3.select("body")		//creates an SVG element in the body
+							.append("svg")
+							.attr("width", width + margin)
+							.attr("height", height + margin);
+
+				d3.select("svg")
+				      .selectAll("circle")
+					  .data(myData)
+					  .enter()
+					  .append("circle")
+						   .attr("cx", function(d){
+							   return d.X;
+						   })
+						   .attr("cy", function(d){
+							   return d.Y;
+						   })
+						   .attr("width", 2);
+
 			});
 
 		</script>
