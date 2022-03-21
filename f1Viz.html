@@ -34,10 +34,12 @@
 		let width = 1000;					//specifies the width, height and margins of our SVG element
 		let height = 600;
 		let margin = 100;
+		let xMid = width / 2;
+		let yMid = height / 2;
 		
-		//const whiteSpaceParser = d3.dsvFormat(" ");
-		//const data = whiteSpaceParser.parse(datapath);
-		//console.log(data);
+		//used for scaling of track position coordinates
+		let xMax = 0;
+		let yMax = 0;
 
 		d3.csv(datapath)
 		    .then(function(myData){
@@ -47,6 +49,15 @@
 							.append("svg")
 							.attr("width", width + margin)
 							.attr("height", height + margin);
+				
+				//convert X and Y attributes back to integers
+				myData.forEach(function(d) {
+					d.X = +d.X;
+					d.Y = +d.Y;
+				});
+
+				let xMax = d3.max(myData, (d) => d.X);
+				let yMax = d3.max(myData, (d) => d.Y);
 
 				d3.select("svg")
 				      .selectAll("circle")
@@ -55,12 +66,14 @@
 					  .style("stroke", "black")
                       .style("fill", "black")
 						   .attr("cx", function(d){
-							   return (d.X / height) * 100;
+							    return xMid + xMid * (d.X / xMax);   
+							//return (d.X / height) * 100;
 						   })
 						   .attr("cy", function(d){
-							   return (d.Y / width) * 100;
+							    return yMid + yMid * (d.Y / yMax);
+							    //return (d.Y / width) * 100;
 						   })
-						   .attr("r", 5);
+						   .attr("r", 2);
 
 			});
 
