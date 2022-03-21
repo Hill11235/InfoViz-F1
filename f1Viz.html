@@ -67,11 +67,9 @@
                       .style("fill", "black")
 						   .attr("cx", function(d){
 							    return xMid + xMid * (d.X / xMax);   
-							//return (d.X / height) * 100;
 						   })
 						   .attr("cy", function(d){
 							    return yMid + yMid * (d.Y / yMax);
-							    //return (d.Y / width) * 100;
 						   })
 						   .attr("r", 2);
 			});
