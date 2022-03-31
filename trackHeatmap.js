@@ -26,7 +26,7 @@ d3.csv(datapath)
         let speedMax = d3.max(myData, (d) => parseInt(d.Speed));
 				const colorScale = d3.scaleLinear()
 										.domain([0, speedMax])
-										.range(['yellow','red']);
+										.range(["#FFFF00","#FF0000"]);
 
         d3.select("svg")
             .selectAll("circle")
