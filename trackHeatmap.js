@@ -55,7 +55,7 @@ d3.csv(datapath)
                     .style("fill", "#000000");
                 toolTip.style("visibility", "visible")
                        .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
-                       .html("<p>Speed: " + + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 20) +"</p>");
+                       .html("<p>Speed: " + + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
             })
             .on("mouseout", function(event, d){
                 d3.select(this)

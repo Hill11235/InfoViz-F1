@@ -14,6 +14,23 @@ d3.csv(datapath)
             .attr("width", width + margin)
             .attr("height", height + margin);
         
+        myData.forEach((d) => console.log(Date.parse(d.Time.substring(10,18))));
+        
+        //consider converting lap time stamp into constituent parts
+        //not agreeing with Date.parse in current form
+        let timeConverter = (d) => {
+            let lapTime = d.Time.substring(10,18);
+            let periods = lapTime.split(":");
+
+            return {
+                mins: parseInt(periods[0]),
+                secs: parseInt(periods[1]),
+                ms: parseInt(periods[2]),
+                totalms: parseInt(periods[0])*60*100 + parseInt(periods[1])*100 + parseInt(periods[2]),
+                speed: d.Speed
+            }
+        }
+
         //convert X and Y attributes back to integers
         myData.forEach(function (d) {
             d.X = +d.X;
