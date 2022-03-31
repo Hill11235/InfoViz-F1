@@ -8,9 +8,8 @@ let yMid = height / 2;
 
 d3.csv(datapath)
     .then(function (myData) {
-        console.log(myData);
 
-        let svg = d3.select("body")        //creates an SVG element in the body
+        let svg = d3.select("#chart1")        //creates an SVG element in the body
             .append("svg")
             .attr("width", width + margin)
             .attr("height", height + margin);
@@ -29,6 +28,16 @@ d3.csv(datapath)
 									.domain([0, speedMax])
 									.range(["#FFFF00","#FF0000"]);
 
+        var toolTip = d3.select("#chart1")
+            .append("div")
+                .style("position", "absolute")
+                .style("visibility", "hidden")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("padding", "2px");
+        
         d3.select("svg")
             .selectAll("circle")
             .data(myData)
@@ -44,18 +53,13 @@ d3.csv(datapath)
             .on("mouseenter", function(event, d){
                 d3.select(this)
                     .style("fill", "#000000");
-                d3.select("svg")
-                    .append("text")
-                        .attr("class", "tooltip")
-                        .attr("x", event.x)
-                        .attr("y", event.y - 20)
-                        .attr("data-html", "true")
-                        .text("Speed: " + d.Speed + "km/h");
+                toolTip.style("visibility", "visible")
+                       .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
+                       .html("<p>Speed: " + + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 20) +"</p>");
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .style("fill", (d) => colorScale(d.Speed));
-                d3.selectAll(".tooltip")
-                    .remove();
+                toolTip.style("visibility", "hidden");
             });
     });
