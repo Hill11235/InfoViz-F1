@@ -29,8 +29,8 @@ d3.csv(datapath, timeConverter)
         
         let speedMax = d3.max(myData, (d) => d.speed);
         let yScale = d3.scaleLinear()
-                            .domain([0, speedMax])
-                            .range([0, height]);
+                            .domain([0, speedMax+20])
+                            .range([height, 0]);
 
         let x_axis = d3.axisBottom(xScale);
         let y_axis = d3.axisLeft(yScale);
