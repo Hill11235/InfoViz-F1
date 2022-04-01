@@ -14,7 +14,7 @@ let timeConverter = (d) => {
     return {
         mins: parseFloat(periods[0]),
         secs: parseFloat(periods[1]),
-        totalSec: parseInt(periods[0])*60 + parseInt(periods[1]),
+        totalSec: parseFloat(periods[0])*60 + parseFloat(periods[1]),
         speed: +d.Speed
     }
 }
@@ -23,13 +23,11 @@ d3.csv(datapath, timeConverter)
     .then((myData) => {
 
         let timeExtent = d3.max(myData, (d) => +d.totalSec);
-        //console.log(err)
-        console.log(timeExtent);
         let xScale = d3.scaleLinear()
                             .domain([0, timeExtent])
                             .range([0, width]);
         
-        let speedMax = d3.max(myData, (d) => d.Speed);
+        let speedMax = d3.max(myData, (d) => d.speed);
         let yScale = d3.scaleLinear()
                             .domain([0, speedMax])
                             .range([0, height]);
@@ -51,4 +49,14 @@ d3.csv(datapath, timeConverter)
                         .attr("class", "y axis")
                         .attr("transform", `translate(${margin}, 0)`)
                         .call(y_axis);
+        
+        let lineGenerator = d3.line()
+                                .x((d) => margin + xScale(+d.totalSec))
+                                .y((d) => yScale(d.speed));
+
+        console.log(myData)
+        scatter_svg.append("path")
+                            .datum(myData)
+                            .attr("class", "line")
+                            .attr("d", lineGenerator);
     });
