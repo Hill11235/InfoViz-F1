@@ -20,16 +20,18 @@ let timeConverter = (d) => {
 }
 
 d3.csv(datapath, timeConverter)
-    .then(function (myData) {
+    .then((myData) => {
 
-        let timeExtent = d3.extent((d) => d.totalSec);
+        let timeExtent = d3.max(myData, (d) => +d.totalSec);
+        //console.log(err)
+        console.log(timeExtent);
         let xScale = d3.scaleLinear()
-                            .domain(timeExtent)
+                            .domain([0, timeExtent])
                             .range([0, width]);
         
-        let speedExtent = d3.extent((d) => d.Speed);
+        let speedMax = d3.max(myData, (d) => d.Speed);
         let yScale = d3.scaleLinear()
-                            .domain(speedExtent)
+                            .domain([0, speedMax])
                             .range([0, height]);
 
         let x_axis = d3.axisBottom(xScale);
@@ -39,4 +41,14 @@ d3.csv(datapath, timeConverter)
             .append("svg")
             .attr("width", width + margin)
             .attr("height", height + margin);
+
+        scatter_svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", `translate(${margin}, ${height})`)
+                        .call(x_axis);
+        
+        scatter_svg.append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", `translate(${margin}, 0)`)
+                        .call(y_axis);
     });
