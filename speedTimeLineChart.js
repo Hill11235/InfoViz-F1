@@ -35,6 +35,10 @@ d3.csv(datapath, timeConverter)
         let x_axis = d3.axisBottom(xScale);
         let y_axis = d3.axisLeft(yScale);
 
+        const colorScale = d3.scaleLinear()
+									.domain([0, speedMax])
+									.range(["#FFFF00","#FF0000"]);
+
         let scatter_svg = d3.select("#chart2")        //creates an SVG element in the body
             .append("svg")
             .attr("width", width + margin)
@@ -58,5 +62,7 @@ d3.csv(datapath, timeConverter)
         scatter_svg.append("path")
                             .datum(myData)
                             .attr("class", "line")
+                            .attr("fill", "none")
+                            .attr("stroke", (d) => colorScale(d.speed))
                             .attr("d", lineGenerator);
     });
