@@ -39,7 +39,7 @@ d3.csv(datapath, timeConverter)
 									.domain([0, speedMax])
 									.range(["#FFFF00","#FF0000"]);
 
-        let scatter_svg = d3.select("#chart2")        //creates an SVG element in the body
+        let scatter_svg = d3.select("#chart3")        //creates an SVG element in the body
             .append("svg")
             .attr("width", width + margin)
             .attr("height", height + margin);
@@ -71,7 +71,7 @@ d3.csv(datapath, timeConverter)
                                 .x((d) => margin + xScale(+d.totalSec))
                                 .y((d) => yScale(d.speed));
 
-        var toolTip2 = d3.select("#chart1")
+        var toolTip3 = d3.select("#chart3")
                             .append("div")
                                 .style("position", "absolute")
                                 .style("visibility", "hidden")
@@ -96,6 +96,6 @@ d3.csv(datapath, timeConverter)
                             .on("mouseout", function(event, d){
                                 d3.select(this)
                                     .style("fill", (d) => colorScale(d.Speed));
-                                toolTip2.style("visibility", "hidden");
+                                toolTip3.style("visibility", "hidden");
                             });
     });
