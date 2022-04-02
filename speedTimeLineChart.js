@@ -53,16 +53,49 @@ d3.csv(datapath, timeConverter)
                         .attr("class", "y axis")
                         .attr("transform", `translate(${margin}, 0)`)
                         .call(y_axis);
+
+        d3.select(".x.axis")
+                    .append("text")
+                        .text("Time - seconds")
+                        .style("fill", "black")
+                        .attr("x", (width - margin)/2)
+                        .attr("y", margin-50);
         
+        d3.select(".y.axis")
+                        .append("text")
+                            .text("Speed - km/h")
+                            .style("fill", "black")
+                            .attr("transform", `rotate(-90,0,${margin-50}) translate(${-margin}, 0)`);
+
         let lineGenerator = d3.line()
                                 .x((d) => margin + xScale(+d.totalSec))
                                 .y((d) => yScale(d.speed));
 
-        console.log(myData)
+        var toolTip2 = d3.select("#chart1")
+                            .append("div")
+                                .style("position", "absolute")
+                                .style("visibility", "hidden")
+                                .style("background-color", "white")
+                                .style("border", "solid")
+                                .style("border-width", "1px")
+                                .style("border-radius", "5px")
+                                .style("padding", "2px");
+
         scatter_svg.append("path")
                             .datum(myData)
                             .attr("class", "line")
+                            .attr("id", "myPath")
                             .attr("fill", "none")
-                            .attr("stroke", (d) => colorScale(d.speed))
-                            .attr("d", lineGenerator);
+                            .attr("stroke", "black")
+                            .attr("d", lineGenerator)
+                            .on("mouseenter", function(event, d){
+                                var m = d3.pointer(event);
+                                d3.select("#myPath").select("title").text(m[1])
+                            })
+                            .append("title")
+                            .on("mouseout", function(event, d){
+                                d3.select(this)
+                                    .style("fill", (d) => colorScale(d.Speed));
+                                toolTip2.style("visibility", "hidden");
+                            });
     });

@@ -9,10 +9,15 @@ let yMid = height / 2;
 d3.csv(datapath)
     .then(function (myData) {
 
-        let svg = d3.select("#chart1")        //creates an SVG element in the body
+        let svg = d3.select("#chart1")        //creates an SVG element
             .append("svg")
             .attr("width", width + margin)
             .attr("height", height + margin);
+
+        d3.select("#chart1")
+                    .append("div")
+                    .attr("id", "dropDownMenu");
+
 
         //convert X and Y attributes back to integers
         myData.forEach(function (d) {
@@ -55,7 +60,7 @@ d3.csv(datapath)
                     .style("fill", "#000000");
                 toolTip.style("visibility", "visible")
                        .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
-                       .html("<p>Speed: " + + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
+                       .html("<p>Speed: " + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
