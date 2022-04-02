@@ -33,12 +33,21 @@ d3.csv(datapath)
                 .style("padding", "2px");
         
         d3.select("#gearSVG")
+                .append("text")
+                .attr("x", (width / 2))
+                .attr("y", 150)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "underline")
+                .text("Gear on track")
+
+        d3.select("#gearSVG")
             .selectAll("circle")
             .data(myData)
             .enter().append("circle")
             .style("fill", (d) => gearScale(d.nGear))
             .attr("cx", function (d) {
-                return xMid + xMid * (d.X / xMax);
+                return (xMid + xMid * (d.X / xMax)) - 150;
             })
             .attr("cy", function (d) {
                 return yMid + yMid * (d.Y / yMax);

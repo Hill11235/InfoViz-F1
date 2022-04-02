@@ -5,6 +5,7 @@
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+    float: left;
 }
 
 @media (min-width: 576px) {

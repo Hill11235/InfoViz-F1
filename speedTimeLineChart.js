@@ -41,6 +41,7 @@ d3.csv(datapath, timeConverter)
 
         let scatter_svg = d3.select("#chart3")        //creates an SVG element in the body
             .append("svg")
+            .attr("id", "lineSVG")
             .attr("width", width + margin)
             .attr("height", height + margin);
 
@@ -80,6 +81,15 @@ d3.csv(datapath, timeConverter)
                                 .style("border-width", "1px")
                                 .style("border-radius", "5px")
                                 .style("padding", "2px");
+
+        d3.select("#lineSVG")
+                .append("text")
+                .attr("x", (width / 2))
+                .attr("y", 16)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("text-decoration", "underline")
+                .text("Speed at given time")
 
         scatter_svg.append("path")
                             .datum(myData)

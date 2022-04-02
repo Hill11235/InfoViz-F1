@@ -44,12 +44,22 @@ d3.csv(datapath)
                 .style("padding", "2px");
         
         d3.select("svg")
+            .append("text")
+            .attr("x", (width / 2))
+            .attr("y", 150)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text("Speed on track")
+
+        //add track position and colour based on speed at that point
+        d3.select("svg")
             .selectAll("circle")
             .data(myData)
             .enter().append("circle")
             .style("fill", (d) => colorScale(d.Speed))
             .attr("cx", function (d) {
-                return xMid + xMid * (d.X / xMax);
+                return (xMid + xMid * (d.X / xMax))-150;
             })
             .attr("cy", function (d) {
                 return yMid + yMid * (d.Y / yMax);
