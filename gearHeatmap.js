@@ -19,8 +19,8 @@ d3.csv(datapath)
         let yMax = d3.max(myData, (d) => d.Y);
         let gearMax = d3.max(myData, (d) => d.nGear);
 		const gearScale = d3.scaleOrdinal()
-									.domain([0, gearMax])
-									.range(["#00FF00","#0000FF"]);
+									.domain([1, gearMax])
+									.range(["gold","green","orange","blue","purple","red","pink","brown"]);
 
         var toolTip2 = d3.select("#chart2")
             .append("div")
