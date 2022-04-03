@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <!-- we want to use D3, so this is where the D3 library version 7 gets called-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="./sectorTimes.js" defer></script>
+    <script>
+        var raceName = "Bahrain"
+        var lapNumber = "1";
+        var numberOfLaps = 0;
+
+        d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Data.csv").then((data) => {
+            data.forEach(function () {
+                numberOfLaps = numberOfLaps + 1;
+            });
+        });
+
+        function changeRace(race) {
+            raceName = race
+            clean()
+            update()
+        }
+
+        function getLapNumber() {
+            document.getElementById("lapNumber").innerHTML = window.lapNumber;
+        }
+
+        function addToLapNumber() {
+            if (lapNumber == numberOfLaps) {
+                lapNumber = 1;
+            } else {
+                lapNumber++;
+            }
+            document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            clean()
+            update()
+        }
+
+        function subtractFromLapNumber() {
+            if (lapNumber == 1) {
+                lapNumber = numberOfLaps;
+            } else {
+                lapNumber--;
+            }
+            document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            clean()
+            update()
+        }
+    </script>
+    <!-- title of the webpage -->
+    <title> CS5044 Practical 2 - F1 Lap Analysis </title>
+    <!-- for css -->
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body onload="getLapNumber()">
+<div class="header">
+    <div class="container" style="display: inline-block">
+        <img src="assets/images/F1-logo.png" alt="logo"/>
+        <h1>CS5044 Practical 2 - F1 Lap Analysis</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="container-content">
+        <div class="driver-profile-container">
+            <h4>Driver Profile</h4>
+            <div class="driver-profile">
+                <div class="driver-info">
+                    <div class="driver-details">
+                        <a style="font-weight: bold">Driver Name: </a>
+                        <a>&nbsp;Charles LeClerc</a>
+                    </div>
+                    <div class="driver-details">
+                        <a style="font-weight: bold">Age:</a>
+                        <a>&nbsp;25</a>
+                    </div>
+                    <div class="driver-details">
+                        <a style="font-weight: bold">Team:</a>
+                        <a>&nbsp;Ferrari</a>
+                    </div>
+                    <div class="driver-details">
+                        <a style="font-weight: bold">Points:</a>
+                        <a>&nbsp;28</a>
+                    </div>
+                </div>
+                <img class="driver-image" src="assets/images/LEC.jpeg" ALT="LEC">
+
+            </div>
+        </div>
+        <div class="race-selector-container">
+            <button class="race-button" onclick="changeRace('Bahrain')">Bahrain</button>
+            <button class="race-button" onclick="changeRace('Qatar')">Qatar</button>
+        </div>
+        <div class="lap-number-container">
+            <button id="subtractButton" class="button" onclick="subtractFromLapNumber()">
+                <div class="button__arrow button__arrow--left"></div>
+            </button>
+            <div class="lap-number-text">
+                <p style="font-weight: bold">Lap Number: </p>
+                <p id="lapNumber"></p>
+            </div>
+            <button id="addButton" class="button" onclick="addToLapNumber()">
+                <div class="button__arrow button__arrow--right"></div>
+            </button>
+        </div>
+        <div class="sector-times-container">
+            <svg id='d3Id' width="600" height="400"></svg>
+            <script src="sectorTimes.js"></script>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
