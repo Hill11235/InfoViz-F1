@@ -9,22 +9,13 @@ let yMid = height / 2;
 d3.csv(datapath)
     .then(function (myData) {
 
-        /*
-        d3.select("#chart1")
-            .append("div")
-            .attr("id", "dropDownMenu")
-            .attr("width", "150px")
-            .style("top", "10px")
-            .style("left", "10px")
-            .style("display", "black")
-            .style("visibility", "visible");
-        */
-        var data = ["Speed", "Gear"];
+        var data = ["Speed", "nGear", "Throttle", "Brake", "DistanceToDriverAhead"];
 
         var select = d3.select('#chart1')
             .append('select')
             .attr("id", "dropDownMenu")
             .attr('class','select')
+            .on("click", updateGraph)
 
         var options = select
             .selectAll('option')
@@ -32,52 +23,45 @@ d3.csv(datapath)
             .append('option')
                 .text(function (d) { return d; });
 
-        let selectValue = d3.select('select').property('value');
-        console.log(selectValue);
-
         let svg = d3.select("#chart1")        //creates an SVG element
             .append("svg")
             .attr("id", "speedSVG")
             .attr("width", width + margin)
             .attr("height", height + margin);
 
-        /*
-        let dropDownMenu = d3.select("#dropDownMenu");
-        dropDownMenu
-                .append("select")
-                .selectAll("option")
-                .data(options)
-                .enter()
-                .append()
-                    .attr("value", function (d) { return d; })
-                    .text(function (d) { return d; });
-            */
 
         //convert X and Y attributes back to integers
         myData.forEach(function (d) {
             d.X = +d.X;
             d.Y = +d.Y;
             d.Speed = +d.Speed;
+            d.nGear = +d.nGear;
+            d.Throttle = +d.Throttle;
         });
 
+        //add tooltip
+        var toolTip = d3.select("#chart1")
+                .append("div")
+                    .style("position", "absolute")
+                    .style("visibility", "hidden")
+                    .style("background-color", "white")
+                    .style("border", "solid")
+                    .style("border-width", "1px")
+                    .style("border-radius", "5px")
+                    .style("padding", "2px");
+
+        //define initial values to be plotted
+        let selectValue = d3.select('select').property('value');
         let xMax = d3.max(myData, (d) => d.X);
         let yMax = d3.max(myData, (d) => d.Y);
-        let speedMax = d3.max(myData, (d) => d.Speed);
-		const colorScale = d3.scaleLinear()
-									.domain([0, speedMax])
-									.range(["#FFFF00","#FF0000"]);
+        let speedMax = d3.max(myData, (d) => d[selectValue]);
+        const colorScale = d3.scaleLinear()
+                                    .domain([0, speedMax])
+                                    .range(["#FFFF00","#FF0000"]);
 
-        var toolTip = d3.select("#chart1")
-            .append("div")
-                .style("position", "absolute")
-                .style("visibility", "hidden")
-                .style("background-color", "white")
-                .style("border", "solid")
-                .style("border-width", "1px")
-                .style("border-radius", "5px")
-                .style("padding", "2px");
-        
-        d3.select("svg")
+        //add title
+        function addTitle(title) {
+            d3.select("svg")
             .append("text")
             .attr("x", (width / 2))
             .attr("y", 150)
@@ -85,9 +69,11 @@ d3.csv(datapath)
             .style("fill", "black")
             .style("font-size", "16px")
             .style("text-decoration", "underline")
-            .text("Speed on track")
+            .text(title)
+        }
+        addTitle(selectValue);
+    
 
-        //add track position and colour based on speed at that point
         d3.select("svg")
             .selectAll("circle")
             .data(myData)
@@ -104,12 +90,48 @@ d3.csv(datapath)
                 d3.select(this)
                     .style("fill", "#000000");
                 toolTip.style("visibility", "visible")
-                       .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
-                       .html("<p>Speed: " + d.Speed + "km/h <br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
+                    .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
+                    .html("<p>" + selectValue + ": " + d[selectValue] + "<br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .style("fill", (d) => colorScale(d.Speed));
                 toolTip.style("visibility", "hidden");
             });
+
+        function updateGraph() {
+            let selectValue = d3.select('select').property('value');
+            let speedMax = d3.max(myData, (d) => d[selectValue]);
+            const colorScale = d3.scaleLinear()
+                                        .domain([0, speedMax])
+                                        .range(["#FFFF00","#FF0000"]);
+            
+            //prevents titles plotting over one another
+            d3.select("svg").select("text").remove();
+
+            //plot updated title
+            addTitle(selectValue);
+
+            //add track position and colour based on metric at that point
+            d3.select("svg")
+                .selectAll("circle")
+                .style("fill", (d) => colorScale(d[selectValue]))
+                .on("mouseenter", function(event, d){
+                    d3.select(this)
+                        .style("fill", "#000000");
+                    toolTip.style("visibility", "visible")
+                        .style("top", (event.pageY)+"px").style("left",(event.pageX)+"px")
+                        .html("<p>" + selectValue + ": " + d[selectValue] + "<br>Time: " + d.Time.substring(10, 18) +" (min/s/ms)</p>");
+                })
+                .on("mouseout", function(event, d){
+                    d3.select(this)
+                        .style("fill", (d) => colorScale(d.Speed));
+                    toolTip.style("visibility", "hidden");
+                });
+        }
+
+
+
+        //svg.selectAll("*").remove()
+        
     });
