@@ -9,15 +9,49 @@ let yMid = height / 2;
 d3.csv(datapath)
     .then(function (myData) {
 
+        /*
+        d3.select("#chart1")
+            .append("div")
+            .attr("id", "dropDownMenu")
+            .attr("width", "150px")
+            .style("top", "10px")
+            .style("left", "10px")
+            .style("display", "black")
+            .style("visibility", "visible");
+        */
+        var data = ["Speed", "Gear"];
+
+        var select = d3.select('#chart1')
+            .append('select')
+            .attr("id", "dropDownMenu")
+            .attr('class','select')
+
+        var options = select
+            .selectAll('option')
+            .data(data).enter()
+            .append('option')
+                .text(function (d) { return d; });
+
+        let selectValue = d3.select('select').property('value');
+        console.log(selectValue);
+
         let svg = d3.select("#chart1")        //creates an SVG element
             .append("svg")
+            .attr("id", "speedSVG")
             .attr("width", width + margin)
             .attr("height", height + margin);
 
-        d3.select("#chart1")
-                    .append("div")
-                    .attr("id", "dropDownMenu");
-
+        /*
+        let dropDownMenu = d3.select("#dropDownMenu");
+        dropDownMenu
+                .append("select")
+                .selectAll("option")
+                .data(options)
+                .enter()
+                .append()
+                    .attr("value", function (d) { return d; })
+                    .text(function (d) { return d; });
+            */
 
         //convert X and Y attributes back to integers
         myData.forEach(function (d) {

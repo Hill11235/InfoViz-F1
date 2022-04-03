@@ -47,3 +47,10 @@
 #Track {
     border: solid #ccc 0.75px;
 }
+
+#dropDownMenu.select {
+    position: absolute;
+    width: 100px;
+    top:0px;
+    left:0px;
+}
