@@ -26,7 +26,7 @@ d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_T
         let xScale = d3.scaleLinear()
                             .domain([0, timeExtent])
                             .range([0, width]);
-        
+
         let speedMax = d3.max(myData, (d) => d.Speed);
         let yScale = d3.scaleLinear()
                             .domain([0, speedMax])
@@ -45,7 +45,7 @@ d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_T
                         .attr("class", "x axis")
                         .attr("transform", `translate(${margin}, ${height})`)
                         .call(x_axis);
-        
+
         scatter_svg.append("g")
                         .attr("class", "y axis")
                         .attr("transform", `translate(${margin}, 0)`)
@@ -57,7 +57,7 @@ d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_T
                         .style("fill", "black")
                         .attr("x", (width - margin)/2)
                         .attr("y", margin-50);
-        
+
         d3.select(".y.axis")
                         .append("text")
                             .text("Speed - km/h")
@@ -82,7 +82,7 @@ d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_T
                 .text(title + " at given time")
         }
         updateLineTitle("Speed")
-        
+
         scatter_svg.append("path")
                             .datum(myData)
                             .attr("class", "line")
@@ -90,9 +90,10 @@ d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_T
                             .attr("fill", "none")
                             .attr("stroke", "green")
                             .attr("d", lineGenerator);
-        
+
         function updateLine() {
-            let selectValue = heatMapMetric;
+            console.log(heatMapMetric)
+            let selectValue = "nGear";
             d3.select("#lineSVG").selectAll("*").remove();
             updateLineTitle(selectValue);
 
