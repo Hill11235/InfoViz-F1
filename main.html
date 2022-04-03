@@ -23,10 +23,12 @@
             plotHeatmapOnTrack()
             clearLineGraph()
             createLineGraph()
+            document.getElementById("lineGraphTitle").innerHTML = "Graph showing " + window.heatMapMetric + " over time for lap:" + window.lapNumber;
+            document.getElementById("barChartTitle").innerHTML = "Chart showing sector information for lap: " + window.lapNumber;
         }
 
         function calculateNumberOfLaps() {
-            numberOfLaps =0;
+            numberOfLaps = 0;
             d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Data.csv").then((data) => {
                 data.forEach(function () {
                     numberOfLaps = numberOfLaps + 1;
@@ -41,6 +43,8 @@
 
         function getLapNumber() {
             document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            document.getElementById("lineGraphTitle").innerHTML = "Graph showing " + window.heatMapMetric + " over time for lap:" + window.lapNumber;
+            document.getElementById("barChartTitle").innerHTML = "Chart showing sector information for lap: " + window.lapNumber;
         }
 
         function addToLapNumber() {
@@ -63,7 +67,7 @@
             updateVisualisations()
         }
 
-        function updateMetric(metric){
+        function updateMetric(metric) {
             heatMapMetric = metric
             updateVisualisations()
         }
@@ -137,13 +141,17 @@
             <div style="position: initial" id="chart1"></div>
             <script src="trackHeatmap.js" type="text/javascript"></script>
         </div>
-        <div class="linegraph-container">
-            <div style="position: initial" id="chart3"></div>
-            <script src="speedTimeLineChart.js" type="text/javascript"></script>
-        </div>
-        <div class="sector-times-container">
-            <svg id='d3Id' width="600" height="400"></svg>
-            <script src="sectorTimes.js"></script>
+        <div class="sub-visualisations">
+            <div style="display: block; text-align: center">
+                <a id="lineGraphTitle"></a>
+                <div style="position: initial; text-align: center" id="chart3"></div>
+                <script src="speedTimeLineChart.js" type="text/javascript"></script>
+            </div>
+            <div style="display: block; text-align: center">
+                <a style="padding-left: 10%" id="barChartTitle"></a>
+                <svg class="sector-bar-chart" id='d3Id' width="500" height="290"></svg>
+                <script src="sectorTimes.js"></script>
+            </div>
         </div>
     </div>
 </div>
