@@ -1,4 +1,4 @@
-let datapath = "data/LEC_Bahrain_Lap_Number56_Telemetry_Data.csv";
+let datapath = "data/Bahrain/LEC_Bahrain_Lap_Number56_Telemetry_Data.csv";
 
 let width = 1000;					//specifies the width, height and margins of our SVG element
 let height = 600;
