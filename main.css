@@ -176,3 +176,10 @@ body {
     padding: 5px;
     width: 25%;
 }
+
+#dropDownMenu.select {
+    position: absolute;
+    width: 100px;
+    top:0px;
+    left:0px;
+}
