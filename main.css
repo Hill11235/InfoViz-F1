@@ -1,49 +1,178 @@
-.container {
+.container,
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    text-align: center;
-    float: left;
 }
 
 @media (min-width: 576px) {
-    .container {
-        max-width: 540px; } }
-@media (min-width: 768px) {
-    .container {
-        max-width: 720px; } }
-@media (min-width: 992px) {
-    .container {
-        max-width: 960px; } }
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px; } }
-
-.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto; }
-
-@media (min-width: 576px) {
     .container, .container-sm {
-        max-width: 540px; } }
+        max-width: 540px;
+    }
+}
 
 @media (min-width: 768px) {
     .container, .container-sm, .container-md {
-        max-width: 720px; } }
+        max-width: 720px;
+    }
+}
 
 @media (min-width: 992px) {
     .container, .container-sm, .container-md, .container-lg {
-        max-width: 960px; } }
+        max-width: 960px;
+    }
+}
 
 @media (min-width: 1200px) {
     .container, .container-sm, .container-md, .container-lg, .container-xl {
-        max-width: 1140px; } }
+        max-width: 1140px;
+    }
+}
 
 #Track {
     border: solid #ccc 0.75px;
+}
+.axis .domain {
+    display: none;
+}
+.header{
+    background: #555;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.header img {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+.header h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+    color: white;
+}
+
+.lap-number-container{
+    padding-top: 2.5%;
+    justify-content: space-evenly;
+    text-align: center;
+    display: flex;
+}
+
+.button {
+    padding: 2%;
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    /* Spacing */
+    padding: 8px;
+}
+
+.button__arrow {
+    /* Transparent background */
+    background-color: transparent;
+
+    /* Size */
+    height: 12px;
+    width: 12px;
+}
+
+.button__arrow--right {
+    /* Edges */
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    transform: translateX(-25%) rotate(45deg);
+}
+
+.button__arrow--left {
+    /* Edges */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    transform: translateX(25%) rotate(45deg);
+}
+
+body {
+    background-color: linen;
+    font-family: sans-serif;
+}
+
+.container-content{
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30%;
+}
+
+.sector-times-container{
+    padding-left: 25%;
+}
+
+.race-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #555;
+    transition-duration: 0.4s;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 25%;
+}
+
+.race-button:hover {
+    background-color: #555;
+    color: white;
+}
+
+.race-selector-container{
+    padding-top: 2.5%;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.driver-profile-container{
+    display: block;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 25%;
+    border: 1px solid #555;
+    width: 50%;
+    background-color: white;
+}
+
+.driver-profile{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5%;
+}
+
+.driver-details{
+    display: flex;
+    padding-top: 3%;
+}
+
+.driver-info{
+    padding-right: 10%;
+    display: inline-block;
+}
+
+.driver-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 25%;
 }
