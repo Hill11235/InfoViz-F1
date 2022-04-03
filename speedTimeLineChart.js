@@ -1,4 +1,4 @@
-let graphWidth = 400;					//specifies the width, height and margins of our SVG element
+let graphWidth = 500;					//specifies the width, height and margins of our SVG element
 let graphHeight = 240;
 let graphMargin = 40;
 
