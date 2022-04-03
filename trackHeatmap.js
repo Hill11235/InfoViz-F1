@@ -9,8 +9,10 @@ let yMid = height / 2;
 d3.csv(datapath)
     .then(function (myData) {
 
-        var data = ["Speed", "nGear", "Throttle", "Brake", "DistanceToDriverAhead"];
+        //dropdown options
+        var data = ["Speed", "nGear", "Throttle", "DistanceToDriverAhead"];
 
+        //add dropdown
         var select = d3.select('#chart1')
             .append('select')
             .attr("id", "dropDownMenu")
@@ -37,6 +39,7 @@ d3.csv(datapath)
             d.Speed = +d.Speed;
             d.nGear = +d.nGear;
             d.Throttle = +d.Throttle;
+            d.DistanceToDriverAhead = parseFloat(d.DistanceToDriverAhead);
         });
 
         //add tooltip
@@ -55,11 +58,11 @@ d3.csv(datapath)
         let xMax = d3.max(myData, (d) => d.X);
         let yMax = d3.max(myData, (d) => d.Y);
         let speedMax = d3.max(myData, (d) => d[selectValue]);
-        const colorScale = d3.scaleLinear()
+        let colorScale = d3.scaleLinear()
                                     .domain([0, speedMax])
                                     .range(["#FFFF00","#FF0000"]);
 
-        //add title
+        //add title function
         function addTitle(title) {
             d3.select("svg")
             .append("text")
@@ -69,10 +72,9 @@ d3.csv(datapath)
             .style("fill", "black")
             .style("font-size", "16px")
             .style("text-decoration", "underline")
-            .text(title)
+            .text(title + " on track")
         }
         addTitle(selectValue);
-    
 
         d3.select("svg")
             .selectAll("circle")
@@ -102,20 +104,27 @@ d3.csv(datapath)
         function updateGraph() {
             let selectValue = d3.select('select').property('value');
             let speedMax = d3.max(myData, (d) => d[selectValue]);
-            const colorScale = d3.scaleLinear()
+            let colorScale = d3.scaleLinear()
                                         .domain([0, speedMax])
                                         .range(["#FFFF00","#FF0000"]);
             
             //prevents titles plotting over one another
             d3.select("svg").select("text").remove();
-
-            //plot updated title
             addTitle(selectValue);
 
-            //add track position and colour based on metric at that point
+            //update colour based on metric at that point
             d3.select("svg")
                 .selectAll("circle")
-                .style("fill", (d) => colorScale(d[selectValue]))
+                .style("fill", function(d) {
+                    if (selectValue === "nGear") {
+                        var scaler = d3.scaleOrdinal()
+                                            .domain([1,2,3,4,5,6,7,8])
+                                            .range(["gold","green","orange","blue","purple","red","pink","brown"]);
+                        return scaler(d[selectValue]);
+                    } else {
+                        return colorScale(d[selectValue]);
+                    }
+                })
                 .on("mouseenter", function(event, d){
                     d3.select(this)
                         .style("fill", "#000000");
@@ -125,13 +134,17 @@ d3.csv(datapath)
                 })
                 .on("mouseout", function(event, d){
                     d3.select(this)
-                        .style("fill", (d) => colorScale(d.Speed));
+                        .style("fill", function(d) {
+                            if (selectValue === "nGear") {
+                                var scaler = d3.scaleLinear()
+                                                    .domain([1,2,3,4,5,6,7,8])
+                                                    .range(["gold","green","orange","blue","purple","red","pink","brown"]);
+                                return scaler(d[selectValue]);
+                            } else {
+                                return colorScale(d[selectValue]);
+                            }
+                        });
                     toolTip.style("visibility", "hidden");
                 });
         }
-
-
-
-        //svg.selectAll("*").remove()
-        
     });
