@@ -31,7 +31,7 @@ d3.csv(datapath, timeConverter)
         let speedMax = d3.max(myData, (d) => d.Speed);
         let yScale = d3.scaleLinear()
                             .domain([0, speedMax])
-                            .range([height, 0]);
+                            .range([height, 50]);
 
         let x_axis = d3.axisBottom(xScale);
         let y_axis = d3.axisLeft(yScale);
@@ -100,7 +100,7 @@ d3.csv(datapath, timeConverter)
             let speedMax = d3.max(myData, (d) => d[selectValue]);
             let yScale = d3.scaleLinear()
                             .domain([0, speedMax])
-                            .range([height, 0]);
+                            .range([height, 50]);
             
             let y_axis = d3.axisLeft(yScale);
 
