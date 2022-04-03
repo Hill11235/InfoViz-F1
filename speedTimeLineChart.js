@@ -9,16 +9,15 @@ let timeConverter = (d) => {
         Speed: +d.Speed,
         nGear: +d.nGear,
         Throttle: +d.Throttle
-        //DistanceToDriverAhead: parseFloat(d.DistanceToDriverAhead)
     }
 }
 
-d3.csv(datapath, timeConverter)
+d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Number" + lapNumber + "_Telemetry_Data.csv", timeConverter)
     .then((myData) => {
 
         //dropdown options
         var data = ["Speed", "nGear", "Throttle", "DistanceToDriverAhead"];
-        let selectValue = d3.select('select').property('value');
+        let selectValue = heatMapMetric;
         
         d3.select('#dropDownMenu')
                 .on("mouseout", updateLine);
@@ -93,7 +92,7 @@ d3.csv(datapath, timeConverter)
                             .attr("d", lineGenerator);
         
         function updateLine() {
-            let selectValue = d3.select('select').property('value');
+            let selectValue = heatMapMetric;
             d3.select("#lineSVG").selectAll("*").remove();
             updateLineTitle(selectValue);
 

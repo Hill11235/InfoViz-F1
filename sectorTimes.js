@@ -1,9 +1,9 @@
-function clean() {
+function clearSectorTimesChart() {
     var svg = d3.select("#d3Id")
     svg.selectAll("*").remove();
 }
 
-function update() {
+function populateSectorTimesChart() {
     var svg = d3.select("#d3Id"),
         margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = +svg.attr("width") - margin.left - margin.right,
@@ -130,4 +130,4 @@ function update() {
             });
     });
 }
-update();
+populateSectorTimesChart();
