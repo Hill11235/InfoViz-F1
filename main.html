@@ -15,7 +15,6 @@
         calculateNumberOfLaps()
 
         function updateVisualisations() {
-            calculateNumberOfLaps()
             clearSectorTimesChart()
             clearHeatMap()
             populateSectorTimesChart()
@@ -28,6 +27,7 @@
         }
 
         function calculateNumberOfLaps() {
+            numberOfLaps = 0;
             d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Data.csv").then((data) => {
                 data.forEach(function () {
                     numberOfLaps = numberOfLaps + 1;
