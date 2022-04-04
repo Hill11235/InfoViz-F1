@@ -12,7 +12,8 @@ let timeConverter = (d) => {
         totalSec: parseFloat(periods[0])*60 + parseFloat(periods[1]),
         Speed: +d.Speed,
         nGear: +d.nGear,
-        Throttle: +d.Throttle
+        Throttle: +d.Throttle,
+        DistanceToDriverAhead: parseFloat(d.DistanceToDriverAhead)
     }
 }
 
