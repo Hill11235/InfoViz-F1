@@ -157,7 +157,7 @@ function drawTrack() {
                 .attr("cy", function (d) {
                     return yMid + yMid * (d.Y / yMax);
                 })
-                .attr("r", 15)
+                .attr("r", 7)
                 .on("mouseenter", function (event, d) {
                     d3.select(this)
                         .style("fill", "#000000");
