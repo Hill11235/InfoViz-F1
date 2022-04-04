@@ -61,9 +61,9 @@ function drawTyrePerformance() {
                 if (tL > tyreLife) {
                     tyreLife = tL
                 } else {
-                    let x = myData.slice(previousTyreChange, d.LapNumber)
+                    let x = myData.slice(previousTyreChange, d.LapNumber - 1)
                     tyreData.push(x)
-                    previousTyreChange = d.LapNumber
+                    previousTyreChange = d.LapNumber -1
                     tyreLife = d.TyreLife;
                 }
             });

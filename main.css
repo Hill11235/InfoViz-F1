@@ -109,6 +109,7 @@ body {
     display: block;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .heatmap-container{
@@ -216,7 +217,7 @@ body {
 }
 
 .tyre-performance-container{
-    padding-left: 15%;
+    /*padding-left: 10%;*/
 }
 
 .lap-number-text{
