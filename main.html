@@ -28,7 +28,6 @@
         }
 
         function calculateNumberOfLaps() {
-            numberOfLaps = 0;
             d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Data.csv").then((data) => {
                 data.forEach(function () {
                     numberOfLaps = numberOfLaps + 1;
@@ -38,6 +37,7 @@
 
         function changeRace(race) {
             raceName = race
+            calculateNumberOfLaps()
             updateVisualisations()
         }
 
@@ -97,7 +97,11 @@
                     </div>
                     <div class="driver-details">
                         <a style="font-weight: bold">Age:</a>
-                        <a>&nbsp;25</a>
+                        <a>&nbsp;24</a>
+                    </div>
+                    <div class="driver-details">
+                        <a style="font-weight: bold">Nationality:</a>
+                        <a>&nbsp;Monacan</a>
                     </div>
                     <div class="driver-details">
                         <a style="font-weight: bold">Team:</a>
@@ -113,8 +117,12 @@
             </div>
         </div>
         <div class="race-selector-container">
-            <button class="race-button" onclick="changeRace('Bahrain')">Bahrain</button>
+            <button class="race-button" onclick="changeRace('Dutch')">Dutch</button>
+            <button class="race-button" onclick="changeRace('Monza')">Monza</button>
+            <button class="race-button" onclick="changeRace('Turkey')">Turkey</button>
+            <button class="race-button" onclick="changeRace('USA')">USA</button>
             <button class="race-button" onclick="changeRace('Qatar')">Qatar</button>
+            <button class="race-button" onclick="changeRace('Bahrain')">Bahrain</button>
         </div>
         <div class="lap-number-container">
             <button id="subtractButton" class="button" onclick="subtractFromLapNumber()">
