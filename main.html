@@ -8,7 +8,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./sectorTimes.js" defer></script>
     <script>
-        var raceName = "Bahrain"
+        var raceName = "Qatar"
         var lapNumber = "1";
         var numberOfLaps = 0;
         var heatMapMetric = "Speed"
@@ -39,12 +39,17 @@
 
         function changeRace(race) {
             raceName = race
+            document.getElementById("raceWeekend").innerHTML = window.raceName + " Grand Prix";
+            document.getElementById("raceWeekend2").innerHTML = window.raceName  + " Grand Prix";
             calculateNumberOfLaps()
             updateVisualisations()
         }
 
         function getLapNumber() {
             document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            document.getElementById("lapNumber2").innerHTML = window.lapNumber;
+            document.getElementById("raceWeekend").innerHTML = window.raceName  + " Grand Prix";
+            document.getElementById("raceWeekend2").innerHTML = window.raceName  + " Grand Prix";
             document.getElementById("lineGraphTitle").innerHTML = "Graph showing " + window.heatMapMetric + " over time for lap: " + window.lapNumber;
             document.getElementById("barChartTitle").innerHTML = "Chart showing sector information for lap: " + window.lapNumber;
         }
@@ -111,10 +116,6 @@
                         <a style="font-weight: bold">Team:</a>
                         <a>&nbsp;Ferrari</a>
                     </div>
-                    <div class="driver-details">
-                        <a style="font-weight: bold">Points:</a>
-                        <a>&nbsp;28</a>
-                    </div>
                 </div>
                 <img class="driver-image" src="assets/images/LEC.jpeg" ALT="LEC">
 
@@ -133,8 +134,11 @@
                 <div class="button__arrow button__arrow--left"></div>
             </button>
             <div class="lap-number-text">
-                <p style="font-weight: bold">Lap Number: </p>
-                <p id="lapNumber"></p>
+                <p id="raceWeekend"></p>
+                <div style="display: inline-flex">
+                    <p style="font-weight: bold">Lap Number:&nbsp; </p>
+                    <p id="lapNumber"></p>
+                </div>
             </div>
             <button id="addButton" class="button" onclick="addToLapNumber()">
                 <div class="button__arrow button__arrow--right"></div>
@@ -174,8 +178,11 @@
                 <div class="button__arrow button__arrow--left"></div>
             </button>
             <div class="lap-number-text">
-                <p style="font-weight: bold">Lap Number: </p>
-                <p id="lapNumber2"></p>
+                <p id="raceWeekend2"></p>
+                <div style="display: inline-flex">
+                    <p style="font-weight: bold">Lap Number:&nbsp; </p>
+                    <p id="lapNumber2"></p>
+                </div>
             </div>
             <button class="button" onclick="addToLapNumber()">
                 <div class="button__arrow button__arrow--right"></div>

@@ -3,6 +3,30 @@ function clearTyrePerformance() {
     svg.selectAll("*").remove();
 }
 
+function getTyreCompoundForLap(data, lapNumber) {
+    let tyreCompound
+    data.forEach(function (d) {
+        d.forEach(function (e) {
+            if(e["LapNumber"] == lapNumber){
+                tyreCompound = e["Compound"]
+            }
+        })
+    });
+    return tyreCompound
+}
+
+function getTyreLifeForLap(data, lapNumber) {
+    let tyreLife;
+    data.forEach(function (d) {
+        d.forEach(function (e) {
+            if(e["LapNumber"] == lapNumber){
+                tyreLife = e["TyreLife"]
+            }
+        })
+    });
+    return tyreLife
+}
+
 function drawTyrePerformance() {
     let toolTip = d3.select("#chart1")
         .append("div")
@@ -43,6 +67,7 @@ function drawTyrePerformance() {
                     tyreLife = d.TyreLife;
                 }
             });
+
             var svg = d3.select("#tyre-performance-chart"),
                 marginTp = 200,
                 widthTp = svg.attr("width") - marginTp,
@@ -102,7 +127,8 @@ function drawTyrePerformance() {
 
             let colors = ["gold", "green", "orange", "blue", "purple", "red", "pink", "brown"]
             let i = 0;
-
+            let c = getTyreLifeForLap(tyreData, 1)
+            console.log(c)
             datasets.forEach(function (dataset) {
                 svg.append('g')
                     .selectAll("dot")
@@ -115,20 +141,16 @@ function drawTyrePerformance() {
                     .attr("cy", function (d) {
                         return yScaleTp(d[1]);
                     })
-                    .attr("r", 2)
+                    .attr("r", 5)
                     .attr("transform", "translate(" + 100 + "," + 100 + ")")
                     .style("fill", colors[i])
                     .on("mouseenter", function (event, d) {
-                            d3.select(this)
-                                .style("fill", "#000000")
                         toolTip.style("visibility", "visible")
                             .style("top", (event.pageY) + "px").style("left", (event.pageX) + "px")
-                            .html("<p> Tyre Compound: " + "Intermediate"  + "<br>Tyre Life: " + "</p>");
+                            .html("<p> Lap Number: " + d[0] + "<br>Average Speed: " + d[1] + "<br>Tyre Life: " + getTyreLifeForLap(tyreData, d[0]) + "<br>Tyre Compound: " + getTyreCompoundForLap(tyreData, d[0]) + "</p>");
                         }
                     )
                     .on("mouseout", function (event, d) {
-                            d3.select(this)
-                                .style("fill","gold" )
                         toolTip.style("visibility", "hidden");
                         }
                     );
