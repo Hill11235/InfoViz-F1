@@ -61,13 +61,13 @@ function createLineGraph(){
                 .text("Time - seconds")
                 .style("fill", "black")
                 .attr("x", (graphWidth - graphMargin)/2)
-                .attr("y", graphMargin-50);
+                .attr("y", graphMargin);
 
             d3.select(".y.axis")
                 .append("text")
                 .text(selectValue)
                 .style("fill", "black")
-                .attr("transform", `rotate(-90,0,${graphMargin-50}) translate(${-graphMargin}, 0)`);
+                .attr("transform", `rotate(-90,0,${graphMargin-10}) translate(${-graphMargin}, 0)`);
 
             let lineGenerator = d3.line()
                 .x((d) => graphMargin + xScale(+d.totalSec))
