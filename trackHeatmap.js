@@ -16,13 +16,13 @@ function sleep(ms) {
 
 async function plotHeatmapOnTrack() {
     await sleep(250)
-    console.log(dataset)
     //convert X and Y attributes back to integers
     let selectValue = heatMapMetric;
     let speedMax = d3.max(dataset, (d) => d[selectValue]);
     let colorScale = d3.scaleLinear()
         .domain([0, speedMax])
         .range(["#FFFF00", "#FF0000"]);
+
     let toolTip = d3.select("#chart1")
         .append("div")
         .style("position", "absolute")
@@ -32,11 +32,11 @@ async function plotHeatmapOnTrack() {
         .style("border-width", "1px")
         .style("border-radius", "5px")
         .style("padding", "2px");
+
     //update colour based on metric at that point
     d3.select("svg")
         .selectAll("circle")
         .style("fill", function (d) {
-            console.log(selectValue)
             if (selectValue === "nGear") {
                 var scaler = d3.scaleOrdinal()
                     .domain([1, 2, 3, 4, 5, 6, 7, 8])
@@ -56,7 +56,6 @@ async function plotHeatmapOnTrack() {
         .on("mouseout", function (event, d) {
             d3.select(this)
                 .style("fill", function (d) {
-                    console.log(selectValue)
                     if (selectValue === "nGear") {
                         var scaler = d3.scaleLinear()
                             .domain([1, 2, 3, 4, 5, 6, 7, 8])
@@ -110,6 +109,42 @@ function drawTrack() {
             let colorScale = d3.scaleLinear()
                 .domain([0, speedMax])
                 .range(["#FFFF00", "#FF0000"]);
+
+            //add colour legend
+            d3.select("svg")
+                .selectAll("rect")
+                .data(myData)
+                .enter().append("rect")
+                .style("fill", function (d) {
+                    if (selectValue === "nGear") {
+                        var scaler = d3.scaleOrdinal()
+                            .domain([1, 2, 3, 4, 5, 6, 7, 8])
+                            .range(["gold", "green", "orange", "blue", "purple", "red", "pink", "brown"]);
+                        return scaler(d[selectValue]);
+                    } else {
+                        return colorScale(d[selectValue]);
+                    }
+                })
+                .attr("x", function(d) {
+                    return (width-80) + (d[selectValue]/speedMax)*80;
+                })
+                .attr("y", height-10)
+                .attr("width", 10)
+                .attr("height", 20);
+            
+            d3.select("svg")
+                .append("text")
+                .attr("id", "maxVal")
+                .attr("x", (width))
+                .attr("y", (height + 30))
+                .text(speedMax);
+
+            d3.select("svg")
+                .append("text")
+                .attr("id", "maxVal")
+                .attr("x", (width - 80))
+                .attr("y", (height + 30))
+                .text(d3.min(myData, (d) => d[selectValue]));
 
             d3.select("svg")
                 .selectAll("circle")
