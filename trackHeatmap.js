@@ -33,6 +33,15 @@ async function plotHeatmapOnTrack() {
         .style("border-radius", "5px")
         .style("padding", "2px");
 
+    d3.select("#maxVal").text(function(d) {
+        if (isNaN(speedMax)){
+            return speedMax;
+        } else {
+            console.log(speedMax.toFixed(0));
+            return speedMax.toFixed(0);
+        }
+    });
+
     //update colour based on metric at that point
     d3.select("svg")
         .selectAll("circle")
@@ -131,20 +140,33 @@ function drawTrack() {
                 .attr("y", height-10)
                 .attr("width", 10)
                 .attr("height", 20);
-            
+
             d3.select("svg")
                 .append("text")
                 .attr("id", "maxVal")
                 .attr("x", (width))
                 .attr("y", (height + 30))
-                .text(speedMax);
+                .text(function(d) {
+                    if (isNaN(speedMax)){
+                        return speedMax;
+                    } else {
+                        return speedMax.toFixed(0);
+                    }
+                });
 
             d3.select("svg")
                 .append("text")
                 .attr("id", "maxVal")
                 .attr("x", (width - 80))
                 .attr("y", (height + 30))
-                .text(d3.min(myData, (d) => d[selectValue]));
+                .text(function(d) {
+                    let minny  = d3.min(myData, (d) => d[selectValue]);
+                    if (isNaN(minny)){
+                        return minny;
+                    } else {
+                        return minny.toFixed(0);
+                    }
+                });
 
             d3.select("svg")
                 .selectAll("circle")
