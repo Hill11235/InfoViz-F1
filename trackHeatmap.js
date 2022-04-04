@@ -16,7 +16,6 @@ function sleep(ms) {
 
 async function plotHeatmapOnTrack() {
     await sleep(250)
-    console.log(dataset)
     //convert X and Y attributes back to integers
     let selectValue = heatMapMetric;
     let speedMax = d3.max(dataset, (d) => d[selectValue]);
@@ -36,7 +35,6 @@ async function plotHeatmapOnTrack() {
     d3.select("svg")
         .selectAll("circle")
         .style("fill", function (d) {
-            console.log(selectValue)
             if (selectValue === "nGear") {
                 var scaler = d3.scaleOrdinal()
                     .domain([1, 2, 3, 4, 5, 6, 7, 8])
@@ -56,7 +54,6 @@ async function plotHeatmapOnTrack() {
         .on("mouseout", function (event, d) {
             d3.select(this)
                 .style("fill", function (d) {
-                    console.log(selectValue)
                     if (selectValue === "nGear") {
                         var scaler = d3.scaleLinear()
                             .domain([1, 2, 3, 4, 5, 6, 7, 8])
