@@ -23,7 +23,7 @@ function populateSectorTimesChart() {
     var z = d3.scaleOrdinal()
         .range(["#003f5c", "#bc5090", "#ffa600"]);
 
-    d3.csv("data/"+ raceName + "/LEC_"+ raceName+"_Lap_Data.csv").then((data) => {
+    d3.csv("data/" + raceName + "/LEC_" + raceName + "_Lap_Data.csv").then((data) => {
         data.forEach(function (d) {
             data.columns.forEach(function (e) {
                 if (d[e] === "") {
@@ -49,10 +49,13 @@ function populateSectorTimesChart() {
 
         data = sectorData.slice(lapNumber - 1, lapNumber);
         var keys = Object.keys(data[0]).slice(1);
+
         x0.domain(data.map(function (d) {
             return d.LapNumber;
         }));
+
         x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+
         y.domain([0, d3.max(data, function (d) {
             return d3.max(keys, function (key) {
                 return d[key];
@@ -130,4 +133,5 @@ function populateSectorTimesChart() {
             });
     });
 }
+
 populateSectorTimesChart();

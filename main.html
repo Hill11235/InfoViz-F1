@@ -22,6 +22,8 @@
             plotHeatmapOnTrack()
             clearLineGraph()
             createLineGraph()
+            clearTyrePerformance()
+            drawTyrePerformance()
             document.getElementById("lineGraphTitle").innerHTML = "Graph showing " + window.heatMapMetric + " over time for lap: " + window.lapNumber;
             document.getElementById("barChartTitle").innerHTML = "Chart showing sector information for lap: " + window.lapNumber;
         }
@@ -54,6 +56,7 @@
                 lapNumber++;
             }
             document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            document.getElementById("lapNumber2").innerHTML = window.lapNumber;
             updateVisualisations()
         }
 
@@ -64,6 +67,7 @@
                 lapNumber--;
             }
             document.getElementById("lapNumber").innerHTML = window.lapNumber;
+            document.getElementById("lapNumber2").innerHTML = window.lapNumber;
             updateVisualisations()
         }
 
@@ -160,6 +164,22 @@
                 <svg class="sector-bar-chart" id='d3Id' width="550" height="290"></svg>
                 <script src="sectorTimes.js"></script>
             </div>
+        </div>
+        <div class="tyre-performance-container">
+            <svg width="800" height="500" id="tyre-performance-chart"></svg>
+            <script src="tyrePerformance.js"></script>
+        </div>
+        <div style="padding-bottom: 5%" class="lap-number-container">
+            <button class="button" onclick="subtractFromLapNumber()">
+                <div class="button__arrow button__arrow--left"></div>
+            </button>
+            <div class="lap-number-text">
+                <p style="font-weight: bold">Lap Number: </p>
+                <p id="lapNumber2"></p>
+            </div>
+            <button class="button" onclick="addToLapNumber()">
+                <div class="button__arrow button__arrow--right"></div>
+            </button>
         </div>
     </div>
 </div>

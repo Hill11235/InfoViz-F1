@@ -200,3 +200,23 @@ body {
 .sector-bar-chart{
     padding-left: 15%;
 }
+
+.focus circle {
+    fill: steelblue;
+}
+
+.focus text {
+    font-size: 14px;
+}
+
+.tooltip {
+    fill: white;
+}
+
+.tooltip-date, .tooltip-likes {
+    font-weight: bold;
+}
+
+.tyre-performance-container{
+    padding-left: 15%;
+}
